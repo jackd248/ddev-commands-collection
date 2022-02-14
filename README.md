@@ -10,9 +10,9 @@ For more information see the additional [README.md](src/CommandsCollection/gener
 ## Installation
 
 Define one of the following project type:
-- TYPO3
-- Symfony
-- Drupal
+- [TYPO3](src/CommandsCollection/typo3)
+- [Symfony](src/CommandsCollection/symfony)
+- [Drupal](src/CommandsCollection/drupal)
 
 ```json
 "config": {

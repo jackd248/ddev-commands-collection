@@ -5,6 +5,10 @@ DDEV Commands Collection
 
 The [DCC (DDEV Commands Collection)](https://github.com/jackd248/ddev-commands-collection) provides several predefined [DDEV commands](https://ddev.readthedocs.io/en/stable/users/cli-usage/) for different project types.
 
+- [TYPO3](https://github.com/jackd248/ddev-commands-collection/tree/master/src/CommandsCollection/typo3)
+- [Symfony](https://github.com/jackd248/ddev-commands-collection/tree/master/src/CommandsCollection/symfony)
+- [Drupal](https://github.com/jackd248/ddev-commands-collection/tree/master/src/CommandsCollection/drupal)
+
 ## Commands
 
 The following default commands are provided independent of the defined project type:
@@ -37,7 +41,7 @@ sh "$(dirname "$0")/../faq/dcc-faq-web-sync.sh"
 You can use the additional scripts with the following line:
 
 ```bash
-. "$(dirname "$0")/../scripts/colors.sh"
+. "$(dirname "$0")/../scripts/dcc-colors.sh"
 ```
 
 `dcc-config.yaml` - The config file contains configuration for the DCC.
@@ -48,7 +52,7 @@ If you want to overwrite or skip an automatic generated DDEV command, you can us
 
 #### Extend
 
-_Extend_ a DCC command and add them manually to the project git. To avoid the overwriting of the command, extend the command with one of the following keyords:
+Extend a DCC command and add them manually to the project git. To avoid the overwriting of the command, extend the command with one of the following keyords:
 
 - `<keep/>`
 - `<ingore/>`

@@ -16,10 +16,11 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## Example: "ddev init"
 
 echo
-read -p $"${magenta}[CONFIG]${reset} Initialize Symfony instanz? (y/n)[n] " INIT_SYMFONY
-read -p $"${magenta}[CONFIG]${reset} Sync database (stage-to-local)? (y/n)[n] " SYNC_DB
-read -p $"${magenta}[CONFIG]${reset} Sync files (stage-to-local)? (y/n)[n] " SYNC_FILES
-read -p $"${magenta}[CONFIG]${reset} Build assets? (y/n)[n] " INSTALL_ASSETS
+echo -e "${magenta}[CONFIG]${reset}"
+read -p $"Initialize Symfony instanz? (y|N) " INIT_SYMFONY
+read -p $"Sync database (stage-to-local)? (y|N) " SYNC_DB
+read -p $"Sync files (stage-to-local)? (y|N) " SYNC_FILES
+read -p $"Build assets? (y|N) " INSTALL_ASSETS
 
 if [[ $INIT_SYMFONY =~ ^[Yy]$ ]]
 then

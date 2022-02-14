@@ -21,7 +21,8 @@ echo -e "${blue}[INFO]${reset} Run command in ${composerPathApp}"
 if [ $# -eq 0 ]
 then
   echo
-  read -p $"${magenta}[CONFIG]${reset} Update npm dependencies? (y|N)" UPDATE_NPM
+  echo -e "${magenta}[CONFIG]${reset}"
+  read -p $"Update npm dependencies? (y|N)" UPDATE_NPM
 
   if [[ $UPDATE_NPM =~ ^[Yy]$ ]]
   then

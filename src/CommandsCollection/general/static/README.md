@@ -44,7 +44,9 @@ You can use the additional scripts with the following line:
 . "$(dirname "$0")/../scripts/dcc-colors.sh"
 ```
 
-`dcc-config.yaml` - The config file contains configuration for the DCC.
+`dcc-config.yaml` - The config file contains configuration for the DCC process.
+
+`dcc-config.sh` - The config file contains configuration for the DCC commands.
 
 ### Overwrite
 

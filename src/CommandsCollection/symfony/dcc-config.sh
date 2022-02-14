@@ -11,6 +11,6 @@
 #
 # Overwrite the given config to your own needs and use a keyword to prevent this file from updates
 #
-composerPathApp="./app"
-composerPathDeployment="."
+composerPathApp="/var/www/html/app"
+composerPathDeployment="/var/www/html"
 defaultSyncSystem="stage"

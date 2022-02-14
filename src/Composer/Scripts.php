@@ -229,9 +229,9 @@ class Scripts
         $countIgnored = is_null(static::$config['ignoreFiles']) ? 0 : count(static::$config['ignoreFiles']);
         $infoIgnored = is_null(static::$config['ignoreFiles']) ? '' : implode(', ', static::$config['ignoreFiles']);
 
-        $infoMessage = "<fg=green>$countCopied</> command(s) copied";
+        $infoMessage = "<fg=green>$countCopied</> file(s) copied";
         if ($countIgnored) {
-            $infoMessage .= ", <fg=yellow>$countIgnored</> command(s) ignored: $infoIgnored";
+            $infoMessage .= ", <fg=yellow>$countIgnored</> file(s) ignored: $infoIgnored";
         }
 
         static::$io->write(" ($infoMessage)");

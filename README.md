@@ -43,6 +43,7 @@ Add the following files to your local project git:
 
 ```bash
 .ddev/
+  dcc-config.sh
   dcc-config.yaml
   .gitignore
 ```

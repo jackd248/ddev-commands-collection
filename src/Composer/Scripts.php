@@ -202,6 +202,8 @@ class Scripts
         $distCommands = static::$config['distDir'] . '/' . static::$config['appType'] . '/';
         // Process all app type specific command files
         $files = glob($distCommands . '*/dcc-*');
+        // add config file
+        $files[] = $distCommands . 'dcc-config.sh';
         foreach($files as $fullPathFilename) {
             $relativePathFilename = str_replace($distCommands, '', $fullPathFilename);
             // Check for ignored files

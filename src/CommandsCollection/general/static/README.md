@@ -13,12 +13,18 @@ The [DCC (DDEV Commands Collection)](https://github.com/jackd248/ddev-commands-c
 
 The following default commands are provided independent of the defined project type:
 
-- `ddev composer:app $@` - Install composer dependencies in the app directory
-- `ddev composer:deployment $@` - Install composer dependencies in the deployment directory
-- `ddev console $@` - Run the console command in the app directory
-- `ddev sync $@` - Synchronize the database
-- `ddev cc $@` - Clear the application cache
-- `ddev release $@` - Release a new app version
+| Command                           | Description                                                |
+|-----------------------------------|------------------------------------------------------------|
+| `ddev composer:app [args]`        | Install composer dependencies in the application directory |
+| `ddev composer:deployment [args]` | Install composer dependencies in the deployment directory  |
+| `ddev console [args]`             | Run the console command in the app directory               |
+| `ddev sync [args]`                | Synchronize the database from a remote system              |
+| `ddev cc [args]`                  | Clear the application cache                                |
+| `ddev release [args]`             | Release a new app version                                  |
+| `ddev init`                       | Initialize the project                                     |
+| `ddev theme [args]`               | Build the frontend theme                                   |
+
+
 
 You can provide additional [custom commands](https://ddev.readthedocs.io/en/stable/users/extend/custom-commands/). 
 
@@ -54,7 +60,7 @@ If you want to overwrite or skip an automatic generated DDEV command, you can us
 
 #### Extend
 
-Extend a DCC command and add them manually to the project git. To avoid the overwriting of the command, extend the command with one of the following keyords:
+Extend a DCC command and add them manually to the project git. To avoid the overwriting of the command, extend the command with one of the following keywords within a comment:
 
 - `<keep/>`
 - `<ingore/>`

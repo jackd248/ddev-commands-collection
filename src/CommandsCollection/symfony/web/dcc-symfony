@@ -14,4 +14,4 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## Description: Executes symfony command
 ## Usage: symfony
 ## Example: "ddev symfony check:security"
-symfony $@ --dir ${composerPathApp}
+cd ${composerPathApp} && symfony $@

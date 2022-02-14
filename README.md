@@ -1,11 +1,11 @@
 DDEV Command Collection
 ========================
 
-The DCC (DDEV Commands Collection) provides several predefined DDEV commands for different project types.
+The DCC (DDEV Commands Collection) provides several predefined [DDEV](https://ddev.readthedocs.io/en/stable/) commands for different project types.
 
 The project comes with an automatic copy and update process of the commands as well as several customization options.
 
-For more information see the additional [README.md](src/CommandsCollection/general/static/README.md).
+For more usage information see the additional [README.md](src/CommandsCollection/general/static/README.md).
 
 ## Installation
 

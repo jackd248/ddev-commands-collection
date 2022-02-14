@@ -21,7 +21,7 @@ echo -e "${blue}[INFO]${reset} Run command in ${composerPathApp}"
 if [ $# -eq 0 ]
 then
   echo
-  read -p $'${magenta}[CONFIG]${reset} Update npm dependencies? (y|N)' UPDATE_NPM
+  read -p $"${magenta}[CONFIG]${reset} Update npm dependencies? (y|N)" UPDATE_NPM
 
   if [[ $UPDATE_NPM =~ ^[Yy]$ ]]
   then
@@ -33,7 +33,7 @@ then
   npm run build
 
   echo
-  echo -e '${green}Done.${reset}'
+  echo -e "${green}Done.${reset}"
 else
   # npm development
   if [[ $@ == "build" || $@ == "development" || $@ == "symfony" ]]

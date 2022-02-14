@@ -1,0 +1,30 @@
+{
+  "name": "kmi/ddev-commands-collection",
+  "description": "Collection of reusable DDEV commands",
+  "license": "MIT",
+  "type": "project",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Konrad Michalik",
+      "email": "hello@konradmichalik.eu"
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor",
+    "bin-dir": "bin",
+    "classmap-authoritative": true
+  },
+  "require": {
+    "composer-plugin-api": "^1.1 || ^2.0",
+    "composer/composer": "^1.9 || ^2.0",
+    "symfony/filesystem": "*",
+    "symfony/yaml": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kmi\\DdevCommandsCollection\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}

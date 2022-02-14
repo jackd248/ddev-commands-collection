@@ -1,0 +1,5 @@
+.idea
+.ddev
+bin
+vendor
+composer.lock

@@ -1,9 +1,12 @@
 DDEV Command Collection
 ========================
 
-The DCC (DDEV Commands Collection) provides several predefined [DDEV](https://ddev.readthedocs.io/en/stable/) commands for different project types.
+<p align="center"><img src="./doc/Images/dcc.svg" alt="DCC" width="150">
+</p>
 
-The project comes with an automatic copy and update process of the commands as well as several customization options.
+The __DCC__ (DDEV Commands Collection) provides several predefined [DDEV](https://ddev.readthedocs.io/en/stable/) commands for different project types.
+
+The project comes with an automatic copy and update process of the commands as well as several customization options. So the DDEV commands in your local project under `.ddev/commands` will always keep updated extended commands.
 
 For more usage information see the additional [README.md](src/CommandsCollection/general/static/README.md).
 
@@ -33,7 +36,7 @@ Add the post scripts in the composer.json:
 }
 ```
 
-Install from packagist via composer:
+Install from [packagist](https://packagist.org/packages/kmi/ddev-commands-collection) via composer:
 
 ```bash
 $ composer req kmi/ddev-commands-collection

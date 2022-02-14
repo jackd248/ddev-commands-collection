@@ -38,3 +38,11 @@ Install from packagist via composer:
 ```bash
 $ composer req kmi/ddev-commands-collection
 ```
+
+Add the following files to your local project git:
+
+```bash
+.ddev/
+  dcc-config.yaml
+  .gitignore
+```

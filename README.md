@@ -1,4 +1,4 @@
-DDEV Command Collection
+DDEV Commands Collection
 ========================
 
 <p align="center"><img src="./doc/Images/dcc.svg" alt="DCC" width="150">

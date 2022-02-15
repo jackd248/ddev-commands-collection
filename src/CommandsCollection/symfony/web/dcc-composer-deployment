@@ -14,4 +14,5 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## Description: Executes 'composer' commands in projectroot
 ## Usage: composer:deployment
 ## Example: "ddev composer:deployment i"
+printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}composer $@ -d ${composerPathDeployment}${reset}\n"
 composer $@ -d  ${composerPathDeployment}

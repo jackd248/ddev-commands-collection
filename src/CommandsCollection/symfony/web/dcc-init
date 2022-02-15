@@ -24,25 +24,36 @@ read -p $"Build assets? (y|N) " INSTALL_ASSETS
 
 if [[ $INIT_SYMFONY =~ ^[Yy]$ ]]
 then
-    echo -e "${blue}[INFO]${reset} Install Symfony"
+    echo -e "${blue}[INFO]${reset} Install Symfony instance"
     cd ${composerPathApp}
     printf "DATABASE_URL=mysql://db:db@db:3306/db\nMAILER_URL=smtp://localhost:1025\nSYMFONY_ENVIRONMENT=Development" >> ${composerPathApp}/.env.local
+    echo -e "${blue}[INFO]${reset} Install dependencies"
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}composer install${reset}\n"
     composer install
+
+    echo -e "${blue}[INFO]${reset} Migrate database schema"
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}php bin/console doctrine:migrations:migrate -n${reset}\n"
     php bin/console doctrine:migrations:migrate -n
+
+    echo -e "${blue}[INFO]${reset} Load data fixtures"
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}php bin/console doctrine:fixtures:load -n${reset}\n"
     php bin/console doctrine:fixtures:load -n
-    echo -e "${green}[OK]${reset} Symfony installed"
+
+    echo -e "${green}[OK]${reset} Symfony instance installed"
 fi
 
 if [[ $SYNC_DB =~ ^[Yy]$ ]]
 then
     echo -e "${blue}[INFO]${reset} Sync remote database into local database"
-    db_sync_tool -f /var/www/html/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.json -o /var/www/html/deployment/db-sync-tool/hosts.json
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}db_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.json -o ${composerPathDeployment}/deployment/db-sync-tool/hosts.json${reset}\n"
+    db_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.json -o ${composerPathDeployment}/deployment/db-sync-tool/hosts.json
 fi
 
 if [[ $SYNC_FILES =~ ^[Yy]$ ]]
 then
     echo -e "${blue}[INFO]${reset} Sync remote files into local filesystem"
-    file_sync_tool -f /var/www/html/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.json -o /var/www/html/deployment/db-sync-tool/hosts.json
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}file_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.json -o ${composerPathDeployment}/deployment/db-sync-tool/hosts.json${reset}\n"
+    file_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.json -o ${composerPathDeployment}/deployment/db-sync-tool/hosts.json
 fi
 
 if [[ $SYNC_DB =~ ^[Yy]$ ]] || [[ $SYNC_FILES =~ ^[Yy]$ ]]
@@ -54,11 +65,14 @@ fi
 
 if [[ $INSTALL_ASSETS =~ ^[Yy]$ ]]
 then
-    echo -e "${blue}[INFO]${reset} Install assets"
+    echo -e "${blue}[INFO]${reset} Install frontend dependencies"
     cd ${composerPathApp}
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm ci${reset}\n"
     npm ci
+    echo -e "${blue}[INFO]${reset} Build assets"
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm run build${reset}\n"
     npm run build
     echo -e "${green}[OK]${reset} Assets installed"
 fi
 echo
-echo -e "${green}Done.${reset}"
+echo -e "${green}Symfony instance successfully initialized${reset}"

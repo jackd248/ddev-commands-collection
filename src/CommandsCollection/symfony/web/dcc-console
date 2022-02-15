@@ -14,4 +14,5 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## Description: Executes symfony console command
 ## Usage: console
 ## Example: "ddev console cache:clear" or "ddev console doctrine:migrations:migrate"
+printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}php ${composerPathApp}/bin/console $@${reset}\n"
 php ${composerPathApp}/bin/console $@

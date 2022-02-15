@@ -27,10 +27,13 @@ then
   if [[ $UPDATE_NPM =~ ^[Yy]$ ]]
   then
     echo -e "${blue}[INFO]${reset} Update npm dependencies"
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm ci${reset}\n"
     npm ci
   fi
 
   # build complete frontend
+
+  printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm run build${reset}\n"
   npm run build
 
   echo
@@ -39,15 +42,21 @@ else
   # npm development
   if [[ $@ == "build" || $@ == "development" || $@ == "symfony" ]]
   then
+
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm run build${reset}\n"
     npm run build
 
   # npm watch
   elif [[ $@ == "watch" ]]
   then
+
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm run watch${reset}\n"
     npm run watch
 
   # every npm
   else
+
+    printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}npm $@${reset}\n"
     npm $@
   fi
 fi

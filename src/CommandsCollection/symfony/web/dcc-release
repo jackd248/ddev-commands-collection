@@ -24,12 +24,15 @@ if [[ $version =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][
   lineNumber=$(sed -n '/version/=' $composerPathApp/composer.json)
 
   # Update property "version"
+  printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}composer config version $version -d $composerPathApp${reset}\n"
   composer config version $version -d $composerPathApp
 
   # Generate new composer.lock file to keep the composer files valid
+  printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}composer update nothing -d "$composerPathApp" -q --no-scripts${reset}\n"
   composer update nothing -d "$composerPathApp" -q --no-scripts
 
   # Validate composer files
+  printf "${reset}${cyan}[DCC]${reset}${reset}[web] ${black}composer validate -d "$composerPathApp"${reset}\n"
   composer validate -d "$composerPathApp"
 
   # Distinguish between Release Candidate and Release

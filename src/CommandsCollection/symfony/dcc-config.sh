@@ -14,3 +14,4 @@
 composerPathApp="/var/www/html/app"
 composerPathDeployment="/var/www/html"
 defaultSyncSystem="stage"
+defaultSyncFileEnding="yaml"

@@ -15,5 +15,5 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## Description: <>
 ## Usage: <>
 ## Example: <>
-printf "${reset}${cyan}[DCC]${reset}[web] ${black}echo test${reset}\n"
+printf "${reset}${cyan}[DCC]${reset}<web> ${black}echo test${reset}\n"
 echo test

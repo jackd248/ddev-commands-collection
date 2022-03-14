@@ -180,7 +180,7 @@ class Scripts
         $commandsPath = static::$config['ddevDir'] . '/commands/';
         $files = glob($commandsPath . '*/dcc-*');
         // add config file
-        $files[] = $commandsPath . 'dcc-config.sh';
+        static::$config['ignoreFiles'][] = $commandsPath . 'dcc-config.sh';
         foreach($files as $filename) {
             if(is_file($filename)) {
                 $fileContent = file_get_contents($filename);

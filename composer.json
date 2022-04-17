@@ -3,7 +3,7 @@
   "description": "Collection of reusable DDEV commands",
   "license": "MIT",
   "type": "project",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "authors": [
     {
       "name": "Konrad Michalik",

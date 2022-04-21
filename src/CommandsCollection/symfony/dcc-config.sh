@@ -15,6 +15,7 @@
 # default
 composerPathApp="/var/www/html/app"
 composerPathDeployment="/var/www/html"
+logPathApp="/var/www/html/app/var/log/dev.log"
 # sync
 defaultSyncSystem="stage"
 defaultSyncFileEnding="yaml"

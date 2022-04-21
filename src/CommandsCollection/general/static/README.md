@@ -23,6 +23,7 @@ The following default commands are provided independent of the defined project t
 | `ddev release [args]`             | Release a new app version                                  |
 | `ddev sync [args]`                | Synchronize the database from a remote system              |
 | `ddev theme [args]`               | Build the frontend theme                                   |
+| `ddev log:app [args]`             | Show the application log                                   |
 
 See `ddev --help` for all available commands within your project.
 

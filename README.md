@@ -45,10 +45,10 @@ Add the post scripts in the composer.json:
 ```json
 "scripts": {
     "post-install-cmd": [
-      "Kmi\\DdevCommandsCollection\\Composer\\Scripts::postInstall"
+      "Kmi\\DdevCommandsCollection\\Composer\\Scripts::updateCommands"
     ],
     "post-update-cmd": [
-      "Kmi\\DdevCommandsCollection\\Composer\\Scripts::postUpdate"
+      "Kmi\\DdevCommandsCollection\\Composer\\Scripts::updateCommands"
     ]
 }
 ```
@@ -65,6 +65,7 @@ Add the following files to your local project git:
 .ddev/
   commands/
     .gitignore
+    dcc-config.sh
 ```
 
 __Note__: If your project structure differs from the example below and your `composer.json` and the ddev directory aren't on the same level, you can define the relative path to the ddev directory inside your `composer.json` like the following example:

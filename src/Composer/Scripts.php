@@ -67,10 +67,13 @@ class Scripts
     ];
 
     /**
+     * Initialize scripts
+     *
      * @param Event $event
+     * @return int
      * @throws \Exception
      */
-    protected static function init(Event $event)
+    protected static function init(Event $event): int
     {
         /** @var Event event */
         static::$event = $event;
@@ -83,14 +86,16 @@ class Scripts
         /** @var Filesystem fs */
         static::$fs = new Filesystem();
 
-        self::initConfig();
+        return self::initConfig();
     }
 
     /**
-     * @return void
+     * Initialize configuration
+     *
+     * @return int
      * @throws \Exception
      */
-    private static function initConfig()
+    private static function initConfig(): int
     {
         static::$config['distDir'] = dirname(dirname(__DIR__)) . '/src/CommandsCollection';
 
@@ -99,7 +104,10 @@ class Scripts
          */
         self::checkAppType();
         static::$config['ddevDir'] = static::$composer->getConfig()->get('ddev-dir') ? './' . static::$composer->getConfig()->get('ddev-dir') : './.ddev';
-        if (!is_dir(static::$config['ddevDir'])) throw new DCCException(sprintf('DDEV directory "%s" doesn\'t exist', static::$config['ddevDir']));
+        if (!is_dir(static::$config['ddevDir'])) {
+            static::$io->write(sprintf('<fg=red>[DCC]</> DDEV directory "%s" doesn\'t exist', static::$config['ddevDir']));
+            return 1;
+        }
 
         /**
          * Get config from config.yaml
@@ -111,39 +119,37 @@ class Scripts
                 static::$config = array_merge(static::$config, $configFile);
             }
         }
+
+        return 0;
     }
 
     /**
+     * Check for configured application type
+     *
      * @return void
      * @throws \Exception
      */
-    private static function checkAppType()
+    private static function checkAppType(): void
     {
         if (!static::$composer->getConfig()->has('dcc-type')) throw new DCCException('Missing composer.json config for "dcc-type"');
 
         static::$config['appType'] = strtolower(static::$composer->getConfig()->get('dcc-type'));
 
-        if (!in_array(static::$config['appType'], self::TYPES)) throw new DCCException(sprintf('App type %s for DCC not known', static::$config['appType']));
+        if (!in_array(static::$config['appType'], self::TYPES, true)) throw new DCCException(sprintf('App type %s for DCC not known', static::$config['appType']));
     }
 
     /**
+     * Update ddev commands (if necessary)
+     *
      * @param Event $event
      * @throws DCCException|\Exception
      */
-    public static function postInstall(Event $event)
+    public static function updateCommands(Event $event): void
     {
-        static::init($event);
-        static::copyFiles();
-    }
-
-    /**
-     * @param Event $event
-     * @throws DCCException|\Exception
-     */
-    public static function postUpdate(Event $event)
-    {
-        static::init($event);
-        static::copyFiles();
+        $statusCode = static::init($event);
+        if (!$statusCode) {
+            static::copyFiles();
+        }
     }
 
     /**
@@ -186,7 +192,7 @@ class Scripts
                 $fileContent = file_get_contents($filename);
                 $shouldFileBeIgnored = false;
                 foreach (self::IGNORE_KEYWORDS as $keyword) {
-                    $shouldFileBeIgnored = boolval(strpos($fileContent, $keyword));
+                    $shouldFileBeIgnored = (bool)strpos($fileContent, $keyword);
                     if ($shouldFileBeIgnored) break;
                 }
                 if ($shouldFileBeIgnored) {
@@ -238,9 +244,12 @@ class Scripts
     }
 
     /**
+     * Get own package version
+     *
      * @return mixed
      */
-    protected static function getVersion() {
+    protected static function getVersion(): mixed
+    {
         $composerFile = dirname(dirname(__DIR__)) . '/composer.json';
         return \json_decode(file_get_contents($composerFile),true)['version'];
     }

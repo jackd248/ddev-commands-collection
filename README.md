@@ -29,7 +29,7 @@ The main goals for the DCC are:
 <a name="installation"></a>
 ## Installation
 
-Define one of the following project type:
+Define one of the following project type within your `composer.json`:
 - [TYPO3](src/CommandsCollection/typo3)
 - [Symfony](src/CommandsCollection/symfony)
 - [Drupal](src/CommandsCollection/drupal)
@@ -66,6 +66,14 @@ Add the following files to your local project git:
   commands/
     .gitignore
 ```
+
+__Note__: If your project structure differs from the example below and your `composer.json` and the ddev directory aren't on the same level, you can define the relative path to the ddev directory inside your `composer.json` like the following example:
+```json
+"config": {
+  "ddev-dir": "./../.ddev"
+}
+```
+
 
 <a name="impact"></a>
 ## Impact

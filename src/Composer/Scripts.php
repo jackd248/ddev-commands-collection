@@ -246,11 +246,11 @@ class Scripts
     /**
      * Get own package version
      *
-     * @return mixed
+     * @return string
      */
-    protected static function getVersion(): mixed
+    protected static function getVersion(): string
     {
         $composerFile = dirname(dirname(__DIR__)) . '/composer.json';
-        return \json_decode(file_get_contents($composerFile),true)['version'];
+        return (string)\json_decode(file_get_contents($composerFile),true)['version'];
     }
 }

@@ -14,20 +14,37 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## see: https://ddev.readthedocs.io/en/stable/users/extend/custom-commands/
 ## Description: Build the deployment docker file and upload them to the artifactory
 ## Usage: docker:deployment:update
-## Example: "ddev docker:deployment:update"
+## Example: "ddev docker:deployment:update" or "ddev docker:deployment:update --skip-upload"
+
+UPLOAD=1
+if [[ $@ == "--skip-upload" ]]
+then
+    UPLOAD=0
+fi
 
 cd ${DDEV_APPROOT}/${dockerImageDir}
 [ ! -f Dockerfile ] && printf "${red}[ERROR]${reset} Dockerfile is missing"
 
 printf "${blue}[INFO]${reset} Build docker container from image file\n"
-printf "${reset}${cyan}[DCC]${reset}<host> ${black}docker build -t ${dockerImageName} .${reset}\n"
-docker build -t ${dockerImageName} .
+printf "${reset}${cyan}[DCC]${reset}<host> ${black}docker buildx build --platform linux/amd64 -t ${dockerImageName} .${reset}\n"
+
+#
+# Workaround to allow the build process for amd64 on a arm64 machine
+# https://stackoverflow.com/a/71001253
+#
+docker buildx build --platform linux/amd64 -t ${dockerImageName} .
 printf "${blue}[INFO]${reset} Tag docker container\n"
 printf "${reset}${cyan}[DCC]${reset}<host> ${black}docker tag ${dockerImageName} ${dockerArtifactory}/${dockerImageName}${reset}\n"
 docker tag ${dockerImageName} ${dockerArtifactory}/${dockerImageName}
-printf "${blue}[INFO]${reset} Upload docker container to artifactory\n"
-printf "${reset}${cyan}[DCC]${reset}<host> ${black}docker push ${dockerArtifactory}/${dockerImageName}${reset}\n"
-docker push ${dockerArtifactory}/${dockerImageName}
 
-printf "${green}[SUCCESS]${reset} Dockerimage successfully uploaded\n"
-printf "${yellow}[HINT]${reset} Keep in mind to delete the old image in the portainer: http://docker.xima.local:5002\n"
+if [ $UPLOAD = 1 ]
+then
+  printf "${blue}[INFO]${reset} Upload docker container to artifactory\n"
+  printf "${reset}${cyan}[DCC]${reset}<host> ${black}docker push ${dockerArtifactory}/${dockerImageName}${reset}\n"
+  docker push ${dockerArtifactory}/${dockerImageName}
+  printf "${green}[SUCCESS]${reset} Docker image successfully created and uploaded\n"
+  printf "${yellow}[HINT]${reset} Keep in mind to delete the old image in the portainer: http://docker.xima.local:5002\n"
+else
+  printf "${green}[SUCCESS]${reset} Docker image successfully created\n"
+fi
+

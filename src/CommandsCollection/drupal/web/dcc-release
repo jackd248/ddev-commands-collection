@@ -29,7 +29,7 @@ if [[ $version =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-((0|[1-9][
 
   # Generate new composer.lock file to keep the composer files valid
   printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}composer update nothing -d "$composerPathApp" -q --no-scripts${reset}\n"
-  composer update nothing -d "$composerPathApp" -q --no-scripts
+  composer update nothing -d "$composerPathApp" -q --no-scripts --no-plugins
 
   # Validate composer files
   printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}composer validate -d "$composerPathApp"${reset}\n"

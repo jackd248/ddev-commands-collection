@@ -1,0 +1,70 @@
+#!/bin/bash
+
+## Description: Update Drupal Composer packages, database and related config.
+## Usage: update:app
+## Example: "ddev update:app"
+
+cd app
+
+echo -e "\033[94m[INFO]\033[m Listing outdated packages."
+composer outdated --direct
+
+echo
+read -p $'\e[95m[CONFIG]\e[m What package(s) would you like to update (skip to update all)?' PACKAGE_NAME
+if [[ -n "$PACKAGE_NAME" ]]
+then
+  read -p $'\e[95m[CONFIG]\e[m Update with dependencies? (y/n)[y] ' WITH_DEPENDENCIES
+fi
+read -p $'\e[95m[CONFIG]\e[m Reset Drupal instance to locked composer packages and staged config ("unstaged" active config changes will be lost)? (y/n)[n] ' RESET_DRUPAL
+
+if [[ $RESET_DRUPAL =~ ^[Yy]$ ]]
+then
+    echo -e "\033[94m[INFO]\033[m Reset drupal instance by installing locked composer packages, updating database and importing staged config."
+    composer install && drush cr && drush updb -y && drush cim -y && drush cr
+fi
+
+echo -e "\033[94m[INFO]\033[m Check config state."
+if [[ $(drush cst) ]]
+then
+  echo -e '\033[31m[ERROR]\033[m Active config needs to be identical to staged one. Abort update.'
+  exit 1;
+fi
+
+if [[ -z "$PACKAGE_NAME" ]]
+then
+    echo -e "\033[94m[INFO]\033[m Update all packages."
+    composer update $PACKAGE_NAME
+elif [[ $WITH_DEPENDENCIES =~ ^[Nn]$ ]]
+then
+    echo -e "\033[94m[INFO]\033[m Update package(s) '$PACKAGE_NAME' without dependencies."
+    composer update $PACKAGE_NAME
+else
+    echo -e "\033[94m[INFO]\033[m Update package '$PACKAGE_NAME' with dependencies."
+    composer update $PACKAGE_NAME --with-dependencies
+fi
+
+# TODO: Skip following on composer error (e.g. "Your requirements could not be resolved to an installable set of packages.")
+
+echo -e "\033[94m[INFO]\033[m Clear cache."
+drush cr
+
+echo -e "\033[94m[INFO]\033[m Update database."
+drush updb -y
+
+echo -e "\033[94m[INFO]\033[m Check and update translations."
+drush locale:check
+drush locale:update
+
+echo -e "\033[94m[INFO]\033[m Export config changes."
+drush cex -y
+
+echo
+echo -e '\033[92mDone.\033[m'
+
+echo -e '\033[93mHEADS UP! Please notice the following update guidelines:\033[m'
+echo -e '\033[93m  - Some packages might not have been updated because they are locked to a specific version.\033[m'
+echo -e '\033[93m  - Remove outdated translation files in config/translations (.po files for previous module versions).\033[m'
+echo -e '\033[93m  - Check for obsolete or newer patches.\033[m'
+echo -e '\033[93m  - If core has been updated, compare default.settings.php with settings.php for possible changes and update with care (do not override the whole file!).\033[m'
+echo -e '\033[93m  - Add all changes (composer.* + config/.) to the git commit.\033[m'
+echo -e '\033[93m  - Copy and paste updated composer packages from the previous output into the git commit massage body.\033[m'

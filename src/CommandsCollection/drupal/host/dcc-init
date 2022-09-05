@@ -1,0 +1,63 @@
+#!/bin/bash
+
+## Description: Install and initialize local Drupal instance
+## Usage: init
+## Example: "ddev init"
+. "$(dirname "$0")/../dcc-config.sh"
+
+echo
+read -p $'\e[95m[CONFIG]\e[m Initialize Drupal instance? (y/n)[n] ' INIT_DRUPAL
+read -p $'\e[95m[CONFIG]\e[m Sync database (@about.master)? (y/n)[n] ' SYNC_DB
+read -p $'\e[95m[CONFIG]\e[m Build assets? (y/n)[n] ' INSTALL_ASSETS
+
+if ! [[ -z ${copyFilesPaths+x} ]]
+then
+  read -p $'\e[95m[CONFIG]\e[m Copy files? (y/n)[n] ' COPY_FILES
+fi
+
+if [[ $INIT_DRUPAL =~ ^[Yy]$ ]]
+then
+    echo -e "\033[94m[INFO]\033[m Install Drupal"
+    cp /var/www/html/app/config/dotenv.example /var/www/html/app/.env
+    cp /var/www/html/app/config/settings.local.dev.php /var/www/html/app/web/sites/default/
+    mv /var/www/html/app/web/sites/default/settings.local.dev.php /var/www/html/app/web/sites/default/settings.local.php
+    # Install deployment requirements
+    composer install
+    # Install app requirements
+    composer install -d app/
+fi
+
+if [[ $SYNC_DB =~ ^[Yy]$ ]]
+then
+    echo -e "\033[94m[INFO]\033[m Sync master database into local database"
+    drush sql:sync @about.master @self --create-db -y --structure-tables-list=cache,cache_*,queue,watchdog
+fi
+
+if [[ $INSTALL_ASSETS =~ ^[Yy]$ ]]
+then
+    echo -e "\033[94m[INFO]\033[m Build theme assets"
+    ddev theme
+
+    if [ -f .ddev/commands/web/theme-admin ]
+    then
+      echo -e "\033[94m[INFO]\033[m Build admin theme assets"
+      ddev theme-admin
+    fi
+
+    echo -e "\033[92m[OK]\033[m Assets built"
+fi
+
+if [[ $INIT_DRUPAL =~ ^[Yy]$ ]]
+then
+    echo -e "\033[94m[INFO]\033[m Drush magic"
+    drush cr && drush updb -y && drush cim -y && drush cr
+    echo -e "\033[92m[OK]\033[m Drupal installed"
+fi
+
+if [[ $COPY_FILES =~ ^[Yy]$ ]]
+then
+  ddev copy-files
+fi
+
+echo
+echo -e '\033[92mDone.\033[m'

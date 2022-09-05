@@ -21,3 +21,7 @@ defaultSyncSystem="@project.master"
 dockerArtifactory="docker-os.artifactory.xima-services.de"
 dockerImageDir="deployment"
 dockerImageName=""
+# copy files in init command
+copyFilesPaths=(
+  "app/web/my/files/*|app/web/some/folder/"
+)

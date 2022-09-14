@@ -18,7 +18,11 @@ echo
 echo -e "${magenta}[CONFIG]${reset}"
 read -p $"Sync database? (y|N) " SYNC_DB
 
-echo -e "${blue}[INFO]${reset} Install composer dependencies"
+echo -e "${blue}[INFO]${reset} Install deployment composer dependencies"
+printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}composer install -d ${composerPathDeployment}${reset}\n"
+composer install -d ${composerPathDeployment}
+
+echo -e "${blue}[INFO]${reset} Install app composer dependencies"
 printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}composer install -d ${composerPathApp}${reset}\n"
 composer install -d ${composerPathApp}
 

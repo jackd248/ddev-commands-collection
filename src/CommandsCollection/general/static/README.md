@@ -60,7 +60,7 @@ You can use the additional scripts with the following line:
 <a name="overwrite"></a>
 ### Overwrite
 
-If you want to overwrite or skip an automatic generated DDEV command, you can use the following two possibilites:
+If you want to overwrite or skip an automatic generated DDEV command, you can use the following two possibilities:
 
 #### Extend
 
@@ -78,3 +78,18 @@ If you want to avoid the copy process of specific commands, you can define them 
 ignoreFiles:
   - web/dcc-test
 ```
+
+### dcc-config.sh
+
+You can configure the following properties in the dcc-config.sh file:
+
+| Property                 | Example                                                                                                                               | Command                   |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| `composerPathApp`         | `/var/www/html/app`                                                                                                                    | `default`                  |
+| `composerPathDeployment`  | `/var/www/html`                                                                                                                        | `default`                  |
+| `logPathApp`              | `/var/www/html/app/var/log/dev.log`                                                                                                    | `default`                  |
+| `defaultSyncSystem`       | `@project.master`                                                                                                                      | `sync`                     |
+| `dockerArtifactory`       | `docker-os.artifactory.xima-services.de`                                                                                               | `docker:deployment:update` |
+| `dockerImageDir`          | `deployment`                                                                                                                           | `docker:deployment:update` |
+| `dockerImageName`         |                                                                                                                                       | `docker:deployment:update` |
+| `copyFilesPaths`          | `("some/folder1/*%PIPE%some/other/folder2/")`<br/><br/>(where %PIPE% is the pipe character which is not allowed in markdown tables ^^) | `copy-files`               |

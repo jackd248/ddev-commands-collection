@@ -23,3 +23,7 @@ defaultSyncFileEnding="yaml"
 dockerArtifactory="docker-os.artifactory.xima-services.de"
 dockerImageDir="deployment"
 dockerImageName=""
+# copy-files
+copyFilesPaths=(
+  #"some/folder1/*|some/other/folder2/"
+)

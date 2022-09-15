@@ -23,5 +23,5 @@ dockerImageDir="deployment"
 dockerImageName=""
 # copy-files
 copyFilesPaths=(
-  "some/folder1/*|some/other/folder2/"
+  #"some/folder1/*|some/other/folder2/"
 )

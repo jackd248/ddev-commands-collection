@@ -8,12 +8,6 @@
 
 for COPY_FILE_PATH in "${copyFilesPaths[@]}"
 do
-  # skip example
-  if [[ $COPY_FILE_PATH == "some/folder1/*|some/other/folder2/" ]]
-  then
-    continue;
-  fi
-
   echo -e "\033[94m[INFO]\033[m Copying files"
 
   IFS='|' read -ra COPY_FILES_PATHS <<< "$COPY_FILE_PATH"

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Run test commands inside the web container
+## Usage: test
+## Example: "ddev test"
+
+vendor/bin/codecept run -c tests/codeception acceptance $@ --verbose

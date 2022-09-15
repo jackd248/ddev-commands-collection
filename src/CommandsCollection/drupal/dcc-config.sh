@@ -13,7 +13,7 @@
 # Overwrite the given config to your own needs
 #
 # default
-composerPathApp="/var/www/html"
+composerPathApp="/var/www/html/app"
 composerPathDeployment="/var/www/html"
 # sync
 defaultSyncSystem="@project.master"
@@ -21,3 +21,7 @@ defaultSyncSystem="@project.master"
 dockerArtifactory="docker-os.artifactory.xima-services.de"
 dockerImageDir="deployment"
 dockerImageName=""
+# copy-files
+copyFilesPaths=(
+  #"some/folder1/*|some/other/folder2/"
+)

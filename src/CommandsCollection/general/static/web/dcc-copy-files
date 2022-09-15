@@ -1,0 +1,21 @@
+#!/bin/bash
+
+## Description: Copy additional files to the project directory.
+## Usage: copy-files
+## Example: "ddev copy-files"
+
+. "$(dirname "$0")/../dcc-config.sh"
+
+for COPY_FILE_PATH in "${copyFilesPaths[@]}"
+do
+  echo -e "\033[94m[INFO]\033[m Copying files"
+
+  IFS='|' read -ra COPY_FILES_PATHS <<< "$COPY_FILE_PATH"
+
+  echo -e "\033[94m[INFO]\033[m Copying ${COPY_FILES_PATHS[0]} to ${COPY_FILES_PATHS[1]}..."
+
+  mkdir -p ${COPY_FILES_PATHS[1]}
+  cp ${COPY_FILES_PATHS[0]} ${COPY_FILES_PATHS[1]}
+
+  echo -e "\033[92m[OK]\033[m Files copied"
+done

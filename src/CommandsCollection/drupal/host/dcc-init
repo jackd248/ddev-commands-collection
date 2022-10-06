@@ -18,13 +18,13 @@ fi
 if [[ $INIT_DRUPAL =~ ^[Yy]$ ]]
 then
     echo -e "\033[94m[INFO]\033[m Install Drupal"
-    cp /var/www/html/app/config/dotenv.example /var/www/html/app/.env
-    cp /var/www/html/app/config/settings.local.dev.php /var/www/html/app/web/sites/default/
-    mv /var/www/html/app/web/sites/default/settings.local.dev.php /var/www/html/app/web/sites/default/settings.local.php
+    ddev exec cp /var/www/html/app/config/dotenv.example /var/www/html/app/.env
+    ddev exec cp /var/www/html/app/config/settings.local.dev.php /var/www/html/app/web/sites/default/
+    ddev exec mv /var/www/html/app/web/sites/default/settings.local.dev.php /var/www/html/app/web/sites/default/settings.local.php
     # Install deployment requirements
-    composer install
+    ddev exec composer install
     # Install app requirements
-    composer install -d app/
+    ddev exec composer install -d app/
 fi
 
 if [[ $SYNC_DB =~ ^[Yy]$ ]]

@@ -50,7 +50,7 @@ fi
 if [[ $INIT_DRUPAL =~ ^[Yy]$ ]]
 then
     echo -e "\033[94m[INFO]\033[m Drush magic"
-    ddev drush cr && drush updb -y && drush cim -y && drush cr
+    ddev drush cr && ddev drush updb -y && ddev drush cim -y && ddev drush cr
     echo -e "\033[92m[OK]\033[m Drupal installed"
 fi
 

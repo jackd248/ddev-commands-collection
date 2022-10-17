@@ -7,7 +7,7 @@
 
 echo
 read -p $'\e[95m[CONFIG]\e[m Initialize Drupal instance? (y/n)[n] ' INIT_DRUPAL
-read -p $'\e[95m[CONFIG]\e[m Sync database (@about.master)? (y/n)[n] ' SYNC_DB
+read -p $'\e[95m[CONFIG]\e[m Sync database? (y/n)[n] ' SYNC_DB
 read -p $'\e[95m[CONFIG]\e[m Build assets? (y/n)[n] ' INSTALL_ASSETS
 
 if ! [[ -z ${copyFilesPaths+x} ]]
@@ -30,7 +30,7 @@ fi
 if [[ $SYNC_DB =~ ^[Yy]$ ]]
 then
     echo -e "\033[94m[INFO]\033[m Sync master database into local database"
-    ddev drush sql:sync @about.master @self --create-db -y --structure-tables-list=cache,cache_*,queue,watchdog
+    ddev drush sql:sync ${defaultSyncSystem} @self --create-db -y --structure-tables-list=cache,cache_*,queue,watchdog
 fi
 
 if [[ $INSTALL_ASSETS =~ ^[Yy]$ ]]

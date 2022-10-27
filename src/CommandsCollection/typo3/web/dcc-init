@@ -17,11 +17,11 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 
 echo
 echo -e "${magenta}[CONFIG]${reset}"
-read -p $"Initialize TYPO3 instanz? (y|N) " INIT_SYMFONY
+read -p $"Initialize TYPO3 instanz? (y|N) " INIT_TYPO3
 read -p $"Sync database (stage-to-local)? (y|N) " SYNC_DB
 read -p $"Build assets? (y|N) " INSTALL_ASSETS
 
-if [[ $INIT_SYMFONY =~ ^[Yy]$ ]]
+if [[ $INIT_TYPO3 =~ ^[Yy]$ ]]
 then
     echo -e "${blue}[INFO]${reset} Install TYPO3 instance"
     cd ${composerPathApp}

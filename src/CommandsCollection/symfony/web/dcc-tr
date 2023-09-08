@@ -25,8 +25,8 @@ composer install -d ${composerPathApp}
 if [[ $SYNC_DB =~ ^[Yy]$ ]]
 then
   echo -e "${blue}[INFO]${reset} Sync database into local database"
-  printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}db_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.${defaultSyncFileEnding}${reset}\n"
-  db_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.${defaultSyncFileEnding}
+  printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}db_sync_tool -f ${deploymentPath}/db-sync-tool/sync-${defaultSyncSystem}-to-local.${defaultSyncFileEnding}${reset}\n"
+  db_sync_tool -f ${deploymentPath}/db-sync-tool/sync-${defaultSyncSystem}-to-local.${defaultSyncFileEnding}
 fi
 
 cd ${composerPathApp}

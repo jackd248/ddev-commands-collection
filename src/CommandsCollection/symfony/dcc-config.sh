@@ -15,6 +15,7 @@
 # default
 composerPathApp="/var/www/html/app"
 composerPathDeployment="/var/www/html"
+deploymentPath="/var/www/html/.deployment"
 logPathApp="/var/www/html/app/var/log/dev.log"
 # sync
 defaultSyncSystem="stage"

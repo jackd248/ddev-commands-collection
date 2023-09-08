@@ -15,6 +15,7 @@
 # default
 composerPathApp="/var/www/html/htdocs/typo3"
 composerPathDeployment="/var/www/html/htdocs"
+deploymentPath="/var/www/html/.deployment"
 logPathApp="/var/www/html/htdocs/typo3/var/log/"
 # sync
 defaultSyncSystem="stage"

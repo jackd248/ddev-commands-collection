@@ -28,8 +28,8 @@ for var in "$@"; do
   fi
 done
 
-printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}db_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${system}-to-local.${defaultSyncFileEnding} ${option}${reset}\n"
-db_sync_tool -f ${composerPathDeployment}/deployment/db-sync-tool/sync-${system}-to-local.${defaultSyncFileEnding} ${option}
+printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}db_sync_tool -f ${deploymentPath}/db-sync-tool/sync-${system}-to-local.${defaultSyncFileEnding} ${option}${reset}\n"
+db_sync_tool -f ${deploymentPath}/db-sync-tool/sync-${system}-to-local.${defaultSyncFileEnding} ${option}
 
 # display faq section
 sh "$(dirname "$0")/../faq/dcc-faq-web-sync.sh"

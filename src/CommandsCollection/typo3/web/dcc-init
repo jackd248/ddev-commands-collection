@@ -28,11 +28,13 @@ then
     cp .env.ddev.dist .env
     echo -e "${blue}[INFO]${reset} Install dependencies"
     printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}composer install${reset}\n"
-    composer install
+    composer install --no-scripts
 
     echo -e "${blue}[INFO]${reset} Setup TYPO3"
     printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}php vendor/bin/typo3cms install:setup --no-interaction --skip-integrity-check${reset}\n"
     php vendor/bin/typo3cms install:setup --no-interaction --skip-integrity-check
+
+    composer typo3-cms-scripts
 
     echo -e "${green}[OK]${reset} TYPO3 instance installed"
 fi

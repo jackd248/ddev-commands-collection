@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Using deployer command inside ddev web container
+## Usage: dep
+## Example: "ddev dep"
+
+dep $@

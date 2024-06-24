@@ -31,8 +31,8 @@ then
     composer install
 
     echo -e "${blue}[INFO]${reset} Setup TYPO3"
-    printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}php vendor/bin/typo3cms install:setup --no-interaction --skip-integrity-check${reset}\n"
-    php vendor/bin/typo3cms install:setup --no-interaction --skip-integrity-check
+    printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}php vendor/bin/typo3 install:setup --no-interaction --skip-integrity-check${reset}\n"
+    php vendor/bin/typo3 install:setup --no-interaction --skip-integrity-check
 
     echo -e "${green}[OK]${reset} TYPO3 instance installed"
 fi
@@ -43,8 +43,8 @@ then
     printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}db_sync_tool -f ${composerPathDeployment}/../deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.${defaultSyncFileEnding}${reset}\n"
     db_sync_tool -f ${composerPathDeployment}/../deployment/db-sync-tool/sync-${defaultSyncSystem}-to-local.${defaultSyncFileEnding}
 
-    ${composerPathApp}/bin/typo3cms database:updateschema
-    ${composerPathApp}/bin/typo3cms cache:flush
+    ${composerPathApp}/bin/typo3 database:updateschema
+    ${composerPathApp}/bin/typo3 cache:flush
     # display faq section
     sh "$(dirname "$0")/../faq/dcc-faq-web-sync.sh"
 fi

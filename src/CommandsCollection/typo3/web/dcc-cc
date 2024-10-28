@@ -14,5 +14,5 @@ printf "${reset}${cyan}[DCC]${reset} DDEV Commands Collection\n"
 ## Description: Executes clear flush console command
 ## Usage: cc
 ## Example: "ddev cc" or "ddev cc -g all"
-printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}php ${composerPathApp}/vendor/bin/typo3cms cache:flush $@${reset}\n"
-php ${composerPathApp}/vendor/bin/typo3cms cache:flush $@
+printf "${reset}${cyan}[DCC]${reset}${reset}<web> ${black}php ${composerPathApp}/vendor/bin/typo3 cache:flush $@${reset}\n"
+php ${composerPathApp}/vendor/bin/typo3 cache:flush $@
